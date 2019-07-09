@@ -5,6 +5,8 @@ const initState = {
     {
       taskId: '123',
       taskName: 'the First thing to do today',
+      workCount: 0,
+      breakCount: 0,
       done: false,
     },
   ],

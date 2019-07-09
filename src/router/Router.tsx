@@ -1,11 +1,6 @@
 import React from 'react';
 import { CSSTransition } from 'react-transition-group';
-import {
-  HashRouter,
-  Route,
-  Link,
-  match,
-} from 'react-router-dom';
+import { HashRouter, Route, match } from 'react-router-dom';
 import H from 'history';
 import { makeStyles } from '@material-ui/core/styles';
 import WorkCountdown from '../pages/WorkCountdown/WorkCountdown';
@@ -53,11 +48,6 @@ export default function Router(): JSX.Element {
 
   return (
     <HashRouter>
-      {routes.map(({ path }): JSX.Element => (
-        <Link to={path} key={path}>
-          <button>{path}</button>
-        </Link>
-      ))}
       {routes.map(({ path, Component }): JSX.Element => (
         <Route key={path} exact path={path}>
           {(ooo): JSX.Element => (

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import H from 'history';
 import { Match } from '../../router/Router';
+import WorkCountdownMain from '../../components/WorkCountdownMain/WorkCountdownMain';
 
 
 interface Props {
@@ -27,11 +28,11 @@ export default function WorkCountdown(props: Props): JSX.Element {
 
   return (
     <>
-      {
-        params.get('taskId')
-          ? params.get('taskId')
-          : tasks[0].taskId && <Redirect to={`/?taskId=${tasks[0].taskId}`} />
-      }
+      {!params.get('taskId')
+        && tasks[0]
+        && tasks[0].taskId
+        && <Redirect to={`/?taskId=${tasks[0].taskId}`} />}
+      <WorkCountdownMain />
     </>
   );
 }
