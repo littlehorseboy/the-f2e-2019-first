@@ -4,11 +4,13 @@ import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import AddNewMission from '../UI/AddNewMission/AddNewMission';
+import PomodoroTime from './PomodoroTime/PomodoroTime';
+import ToDoListTopThree from './ToDoListTopThree/ToDoListTopThree';
 
 const useStyles = makeStyles((theme: Theme): Record<
 'root' | 'leftPane' | 'middlePane' | 'middleContaiberPane' | 'middleLeftPane' | 'middleRightPane' |
@@ -74,19 +76,8 @@ export default function WorkCountdownMain(): JSX.Element {
         <Grid item xs={12} sm={5} className={classes.leftPane}>
           <div>
             <AddNewMission />
-            <div>
-              <FormControlLabel
-                control={<Checkbox icon={<RadioButtonUncheckedIcon />} checkedIcon={<CheckCircleIcon />} value="checkedH" />}
-                label="Custom icon"
-              />
-              <div>the First thing to do today</div>
-              <div>25:00</div>
-            </div>
-            <div>
-              <div>the second thing to do today</div>
-              <div>the third thing to do today</div>
-              <div>the forth thing to do today</div>
-            </div>
+            <PomodoroTime />
+            <ToDoListTopThree />
           </div>
         </Grid>
         <Grid item xs={12} sm={5} className={classes.middlePane}>
