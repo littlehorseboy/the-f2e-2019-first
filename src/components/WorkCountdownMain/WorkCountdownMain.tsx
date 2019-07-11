@@ -13,7 +13,7 @@ import ToDoListTopThree from './ToDoListTopThree/ToDoListTopThree';
 
 const useStyles = makeStyles((theme: Theme): Record<
 'root' | 'leftPane' | 'middlePane' | 'middleContaiberPane' | 'middleLeftPane' | 'middleRightPane' |
-'rightPane' | 'fabContainer' | 'fab', CSSProperties | (() => CSSProperties)
+'rightPane' | 'rightPaneTop' | 'rightPaneBottom' | 'fabContainer' | 'fab', CSSProperties | (() => CSSProperties)
 > => createStyles({
   root: {
     padding: 0,
@@ -47,6 +47,23 @@ const useStyles = makeStyles((theme: Theme): Record<
   },
   rightPane: {
     backgroundColor: '#003164',
+    '& > div': {
+      paddingTop: 48,
+      paddingBottom: 48,
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+  },
+  rightPaneTop: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  rightPaneBottom: {
+    transform: 'rotate(90deg)',
+    marginBottom: '2.5rem',
   },
   fabContainer: {
     position: 'absolute',
@@ -89,6 +106,16 @@ export default function WorkCountdownMain(): JSX.Element {
           </div>
         </Grid>
         <Grid item xs={12} sm={2} className={classes.rightPane}>
+          <div>
+            <div className={classes.rightPaneTop}>
+              <CheckCircleIcon />
+              <CheckCircleIcon />
+              <CheckCircleIcon />
+            </div>
+            <div className={classes.rightPaneBottom}>
+              POMODORO
+            </div>
+          </div>
         </Grid>
       </Grid>
     </Container>

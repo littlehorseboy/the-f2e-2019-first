@@ -8,6 +8,7 @@ const initState = {
       workCount: 0,
       breakCount: 0,
       done: false,
+      doneTime: new Date(2019, 6, 2),
     },
   ],
 };
