@@ -4,17 +4,15 @@ import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
-import Checkbox from '@material-ui/core/Checkbox';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import IconButton from '@material-ui/core/IconButton';
+import ListIcon from '@material-ui/icons/List';
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
 import AddNewMission from '../UI/AddNewMission/AddNewMission';
 import PomodoroTime from './PomodoroTime/PomodoroTime';
 import ToDoListTopThree from './ToDoListTopThree/ToDoListTopThree';
 
-const useStyles = makeStyles((theme: Theme): Record<
-'root' | 'leftPane' | 'middlePane' | 'middleContaiberPane' | 'middleLeftPane' | 'middleRightPane' |
-'rightPane' | 'rightPaneTop' | 'rightPaneBottom' | 'fabContainer' | 'fab', CSSProperties | (() => CSSProperties)
-> => createStyles({
+const useStyles = makeStyles({
   root: {
     padding: 0,
     minHeight: '100vh',
@@ -64,6 +62,9 @@ const useStyles = makeStyles((theme: Theme): Record<
   rightPaneBottom: {
     transform: 'rotate(90deg)',
     marginBottom: '2.5rem',
+    color: '#FFFFFF',
+    fontSize: '1rem',
+    fontWeight: 'bold',
   },
   fabContainer: {
     position: 'absolute',
@@ -81,7 +82,14 @@ const useStyles = makeStyles((theme: Theme): Record<
     border: '3px solid transparent',
     outline: '3px solid transparent',
   },
-}));
+  icon: {
+    color: '#FFFFFF',
+    marginBottom: '1rem',
+    '&:last-child': {
+      marginBottom: 0,
+    },
+  },
+});
 
 export default function WorkCountdownMain(): JSX.Element {
   const classes = useStyles();
@@ -108,9 +116,15 @@ export default function WorkCountdownMain(): JSX.Element {
         <Grid item xs={12} sm={2} className={classes.rightPane}>
           <div>
             <div className={classes.rightPaneTop}>
-              <CheckCircleIcon />
-              <CheckCircleIcon />
-              <CheckCircleIcon />
+              <IconButton className={classes.icon}>
+                <ListIcon />
+              </IconButton>
+              <IconButton className={classes.icon}>
+                <AssessmentIcon />
+              </IconButton>
+              <IconButton className={classes.icon}>
+                <LibraryMusicIcon />
+              </IconButton>
             </div>
             <div className={classes.rightPaneBottom}>
               POMODORO
