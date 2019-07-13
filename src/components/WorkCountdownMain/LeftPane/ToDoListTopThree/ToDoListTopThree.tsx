@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -12,6 +13,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import { Button } from '@material-ui/core';
 import { TaskInterface } from '../../../../pages/WorkCountdown/WorkCountdown';
+import { changeTaskDone } from '../../../../actions/toDoList/toDoList';
 
 const useStyles = makeStyles({
   root: {
@@ -34,6 +36,12 @@ interface Props {
 export default function ToDoListTopThree(props: Props): JSX.Element {
   const classes = useStyles();
 
+  const dispatch = useDispatch();
+
+  const handleChangeTaskDone = (task: TaskInterface): void => {
+    dispatch(changeTaskDone(task));
+  };
+
   return (
     <div className={classes.root}>
       <List>
@@ -46,6 +54,7 @@ export default function ToDoListTopThree(props: Props): JSX.Element {
                 icon={<RadioButtonUncheckedIcon />}
                 checkedIcon={<CheckCircleIcon />}
                 checked={task.done}
+                onChange={(): void => handleChangeTaskDone(task)}
               />
             </ListItemIcon>
             <ListItemText

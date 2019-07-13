@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -6,6 +7,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import { Typography } from '@material-ui/core';
 import { TaskInterface } from '../../../../pages/WorkCountdown/WorkCountdown';
+import { changeTaskDone } from '../../../../actions/toDoList/toDoList';
 
 const useStyles = makeStyles((theme: Theme): Record<'root' | 'checkboxContainer' | 'bigCheckbox'
 | 'uncheckedIcon' | 'pomodoroToDoText' | 'timeText', CSSProperties | (() => CSSProperties)> => createStyles({
@@ -52,6 +54,14 @@ interface Props {
 export default function PomodoroTime(props: Props): JSX.Element {
   const classes = useStyles();
 
+  const dispatch = useDispatch();
+
+  const handleChangeTaskDone = (): void => {
+    if (props.selectedTask) {
+      dispatch(changeTaskDone(props.selectedTask));
+    }
+  };
+
   const selectedTask = props.selectedTask ? props.selectedTask : {
     taskId: '',
     taskName: '',
@@ -74,6 +84,7 @@ export default function PomodoroTime(props: Props): JSX.Element {
           </svg>}
           checkedIcon={<CheckCircleIcon />}
           checked={selectedTask.done}
+          onChange={handleChangeTaskDone}
         />
         <div>
           <Typography className={classes.pomodoroToDoText}>
