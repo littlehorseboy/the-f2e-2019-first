@@ -10,15 +10,13 @@ interface Props {
   location: H.Location;
 }
 
-export interface TasksInterface {
-  [index: number]: {
-    taskId: string;
-    taskName: string;
-    workCount: number;
-    breakCount: number;
-    done: boolean;
-    doneTime: Date;
-  };
+export interface TaskInterface {
+  taskId: string;
+  taskName: string;
+  workCount: number;
+  breakCount: number;
+  done: boolean;
+  doneTime: Date | null;
 }
 
 export default function WorkCountdown(props: Props): JSX.Element {
@@ -26,8 +24,8 @@ export default function WorkCountdown(props: Props): JSX.Element {
 
   const tasks = useSelector(
     (
-      state: { toDoListReducer: { tasks: TasksInterface } },
-    ): TasksInterface => state.toDoListReducer.tasks,
+      state: { toDoListReducer: { tasks: TaskInterface[] } },
+    ): TaskInterface[] => state.toDoListReducer.tasks,
   );
 
   return (
@@ -36,7 +34,7 @@ export default function WorkCountdown(props: Props): JSX.Element {
         && tasks[0]
         && tasks[0].taskId
         && <Redirect to={`/?taskId=${tasks[0].taskId}`} />}
-      <WorkCountdownMain tasks={tasks} />
+      <WorkCountdownMain tasks={tasks} selectedTaskId={params.get('taskId')} />
     </>
   );
 }

@@ -1,6 +1,11 @@
-import { CHANGE_STATUS } from '../../actions/toDoList/toDoList';
+import { ADD_TASK, ToDoListActionI } from '../../actions/toDoList/toDoList';
+import { TaskInterface } from '../../pages/WorkCountdown/WorkCountdown';
 
-const initState = {
+interface Tasks {
+  tasks: TaskInterface[];
+}
+
+const initState: Tasks = {
   tasks: [
     {
       taskId: '1',
@@ -12,7 +17,7 @@ const initState = {
     },
     {
       taskId: '2',
-      taskName: 'the First thing to do today',
+      taskName: 'the second thing to do today',
       workCount: 0,
       breakCount: 0,
       done: false,
@@ -37,12 +42,14 @@ const initState = {
   ],
 };
 
-const reducer = (state = initState, action) => {
+const reducer = (state = initState, action: ToDoListActionI): Tasks => {
   switch (action.type) {
-    case CHANGE_STATUS:
+    case ADD_TASK:
       return {
-        ...state,
-        status: action.payload.status,
+        tasks: [
+          ...state.tasks,
+          action.payload.task,
+        ],
       };
     default:
       return state;

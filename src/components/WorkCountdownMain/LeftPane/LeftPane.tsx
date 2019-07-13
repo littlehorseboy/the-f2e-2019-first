@@ -4,7 +4,7 @@ import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import AddNewMission from '../../UI/AddNewMission/AddNewMission';
 import PomodoroTime from './PomodoroTime/PomodoroTime';
 import ToDoListTopThree from './ToDoListTopThree/ToDoListTopThree';
-import { TasksInterface } from '../../../pages/WorkCountdown/WorkCountdown';
+import { TaskInterface } from '../../../pages/WorkCountdown/WorkCountdown';
 
 const useStyles = makeStyles((theme: Theme): Record<'root', CSSProperties | (() => CSSProperties)> => createStyles({
   root: {
@@ -24,17 +24,23 @@ const useStyles = makeStyles((theme: Theme): Record<'root', CSSProperties | (() 
 }));
 
 interface Props {
-  tasks: TasksInterface;
+  tasks: TaskInterface[];
+  selectedTaskId: string | null;
 }
 
 export default function WorkCountdownMain(props: Props): JSX.Element {
   const classes = useStyles();
 
+  const selectedTask = props.tasks
+    .find((task): boolean => task.taskId === props.selectedTaskId);
+
+  const filteredTasks = props.tasks.filter((task): boolean => task.taskId !== props.selectedTaskId);
+
   return (
     <div className={classes.root}>
       <AddNewMission />
-      <PomodoroTime selectedTask={props.tasks[0]} />
-      <ToDoListTopThree />
+      <PomodoroTime selectedTask={selectedTask} />
+      <ToDoListTopThree filteredTasks={filteredTasks} />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import LeftPane from './LeftPane/LeftPane';
 import MiddlePane from './MiddlePane/MiddlePane';
 import RightPane from './RightPane/RightPane';
-import { TasksInterface } from '../../pages/WorkCountdown/WorkCountdown';
+import { TaskInterface } from '../../pages/WorkCountdown/WorkCountdown';
 
 const useStyles = makeStyles({
   root: {
@@ -25,7 +25,8 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  tasks: TasksInterface;
+  tasks: TaskInterface[];
+  selectedTaskId: string | null;
 }
 
 export default function WorkCountdownMain(props: Props): JSX.Element {
@@ -35,7 +36,7 @@ export default function WorkCountdownMain(props: Props): JSX.Element {
     <Container maxWidth={false} className={classes.root}>
       <Grid container spacing={0}>
         <Grid item xs={12} sm={12} md={5} className={classes.leftPane}>
-          <LeftPane tasks={props.tasks} />
+          <LeftPane tasks={props.tasks} selectedTaskId={props.selectedTaskId} />
         </Grid>
 
         <Grid item xs={12} sm={12} md={6} className={classes.middlePane}>

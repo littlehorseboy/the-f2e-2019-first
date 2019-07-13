@@ -5,6 +5,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import { Typography } from '@material-ui/core';
+import { TaskInterface } from '../../../../pages/WorkCountdown/WorkCountdown';
 
 const useStyles = makeStyles((theme: Theme): Record<'root' | 'checkboxContainer' | 'bigCheckbox'
 | 'uncheckedIcon' | 'pomodoroToDoText' | 'timeText', CSSProperties | (() => CSSProperties)> => createStyles({
@@ -45,18 +46,20 @@ const useStyles = makeStyles((theme: Theme): Record<'root' | 'checkboxContainer'
 }));
 
 interface Props {
-  selectedTask: {
-    taskId: string;
-    taskName: string;
-    workCount: number;
-    breakCount: number;
-    done: boolean;
-    doneTime: Date;
-  };
+  selectedTask: TaskInterface | undefined;
 }
 
 export default function PomodoroTime(props: Props): JSX.Element {
   const classes = useStyles();
+
+  const selectedTask = props.selectedTask ? props.selectedTask : {
+    taskId: '',
+    taskName: '',
+    workCount: 0,
+    breakCount: 0,
+    done: false,
+    doneTime: null,
+  };
 
   return (
     <div className={classes.root}>
@@ -70,14 +73,14 @@ export default function PomodoroTime(props: Props): JSX.Element {
             />
           </svg>}
           checkedIcon={<CheckCircleIcon />}
-          checked={props.selectedTask.done}
+          checked={selectedTask.done}
         />
         <div>
           <Typography className={classes.pomodoroToDoText}>
-            {props.selectedTask.taskName.toUpperCase()}
+            {selectedTask.taskName.toUpperCase()}
           </Typography>
           <div>
-            {new Array(props.selectedTask.workCount).map((n, index): JSX.Element => <RadioButtonUncheckedIcon key={index} color="secondary" fontSize="small" />)}
+            {new Array(selectedTask.workCount).map((n, index): JSX.Element => <RadioButtonUncheckedIcon key={index} color="secondary" fontSize="small" />)}
             <RadioButtonUncheckedIcon color="secondary" fontSize="small" />
           </div>
         </div>

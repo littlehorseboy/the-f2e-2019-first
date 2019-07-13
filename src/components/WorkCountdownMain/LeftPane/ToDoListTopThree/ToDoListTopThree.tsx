@@ -11,6 +11,7 @@ import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import { Button } from '@material-ui/core';
+import { TaskInterface } from '../../../../pages/WorkCountdown/WorkCountdown';
 
 const useStyles = makeStyles({
   root: {
@@ -26,68 +27,37 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ToDoListTopThree(): JSX.Element {
+interface Props {
+  filteredTasks: TaskInterface[];
+}
+
+export default function ToDoListTopThree(props: Props): JSX.Element {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <List>
-        <ListItem dense button divider>
-          <ListItemIcon>
-            <Checkbox
-              edge="start"
-              icon={<RadioButtonUncheckedIcon />}
-              checkedIcon={<CheckCircleIcon />}
+        {props.filteredTasks
+          .slice(0, 3)
+          .map((task): JSX.Element => <ListItem key={task.taskId} dense button divider>
+            <ListItemIcon>
+              <Checkbox
+                edge="start"
+                icon={<RadioButtonUncheckedIcon />}
+                checkedIcon={<CheckCircleIcon />}
+                checked={task.done}
+              />
+            </ListItemIcon>
+            <ListItemText
+              className={classes.listItemText}
+              primary={task.taskName}
             />
-          </ListItemIcon>
-          <ListItemText
-            className={classes.listItemText}
-            primary="the second thing to do today"
-          />
-          <ListItemSecondaryAction>
-            <IconButton edge="end" aria-label="Play">
-              <PlayCircleOutlineIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
-
-        <ListItem dense button divider>
-          <ListItemIcon>
-            <Checkbox
-              edge="start"
-              icon={<RadioButtonUncheckedIcon />}
-              checkedIcon={<CheckCircleIcon />}
-            />
-          </ListItemIcon>
-          <ListItemText
-            className={classes.listItemText}
-            primary="the third thing to do today"
-          />
-          <ListItemSecondaryAction>
-            <IconButton edge="end" aria-label="Play">
-              <PlayCircleOutlineIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
-
-        <ListItem dense button divider>
-          <ListItemIcon>
-            <Checkbox
-              edge="start"
-              icon={<RadioButtonUncheckedIcon />}
-              checkedIcon={<CheckCircleIcon />}
-            />
-          </ListItemIcon>
-          <ListItemText
-            className={classes.listItemText}
-            primary="the forth thing to do today"
-          />
-          <ListItemSecondaryAction>
-            <IconButton edge="end" aria-label="Play">
-              <PlayCircleOutlineIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
+            <ListItemSecondaryAction>
+              <IconButton edge="end" aria-label="Play">
+                <PlayCircleOutlineIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>)}
       </List>
       <div className={classes.buttonContainer}>
         <Button color="secondary">MORE</Button>
