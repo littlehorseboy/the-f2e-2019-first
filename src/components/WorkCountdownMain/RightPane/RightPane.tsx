@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
@@ -7,7 +8,7 @@ import ListIcon from '@material-ui/icons/List';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
 
-const useStyles = makeStyles((theme: Theme): Record<'root' | 'rightPaneTop' | 'rightPaneBottom' | 'icon', CSSProperties | (() => CSSProperties)> => createStyles({
+const useStyles = makeStyles((theme: Theme): Record<'root' | 'rightPaneTop' | 'rightPaneBottom' | 'iconButton', CSSProperties | (() => CSSProperties)> => createStyles({
   root: {
     paddingTop: 48,
     paddingBottom: 48,
@@ -38,14 +39,16 @@ const useStyles = makeStyles((theme: Theme): Record<'root' | 'rightPaneTop' | 'r
     color: '#FFFFFF',
     fontWeight: 'bold',
   },
-  icon: {
-    color: '#FFFFFF',
+  iconButton: {
     marginBottom: '1rem',
     [theme.breakpoints.down('sm')]: {
       marginBottom: 0,
     },
     '&:last-child': {
       marginBottom: 0,
+    },
+    '& > button': {
+      color: '#FFFFFF',
     },
   },
 }));
@@ -56,15 +59,23 @@ export default function WorkCountdownMain(): JSX.Element {
   return (
     <div className={classes.root}>
       <div className={classes.rightPaneTop}>
-        <IconButton className={classes.icon}>
-          <ListIcon fontSize="large" />
-        </IconButton>
-        <IconButton className={classes.icon}>
-          <AssessmentIcon fontSize="large" />
-        </IconButton>
-        <IconButton className={classes.icon}>
-          <LibraryMusicIcon fontSize="large" />
-        </IconButton>
+        <Link to="/todolist" className={classes.iconButton}>
+          <IconButton>
+            <ListIcon fontSize="large" />
+          </IconButton>
+        </Link>
+
+        <Link to="/todolist" className={classes.iconButton}>
+          <IconButton>
+            <AssessmentIcon fontSize="large" />
+          </IconButton>
+        </Link>
+
+        <Link to="/todolist" className={classes.iconButton}>
+          <IconButton>
+            <LibraryMusicIcon fontSize="large" />
+          </IconButton>
+        </Link>
       </div>
       <Typography className={classes.rightPaneBottom} variant="h5">
         POMODORO

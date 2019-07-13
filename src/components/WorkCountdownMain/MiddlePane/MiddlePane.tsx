@@ -101,7 +101,6 @@ export default function WorkCountdownMain(): JSX.Element {
       );
     }, 500);
     return (): void => {
-      debugger;
       clearInterval(timer);
     };
   }, []);
