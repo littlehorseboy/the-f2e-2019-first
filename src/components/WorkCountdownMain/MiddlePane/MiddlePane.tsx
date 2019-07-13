@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
+import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import StopIcon from '@material-ui/icons/Stop';
 
 const fabWidth = 540;
 
@@ -37,10 +39,22 @@ const useStyles = makeStyles({
   playCircleIcon: {
     fontSize: '8rem',
   },
+  iconButton: {
+    position: 'absolute',
+    color: '#FFFFFF',
+    transform: 'translate(75px, 45px)',
+    zIndex: 1,
+  },
   progress: {
     position: 'absolute',
     width: `${fabWidth + 30}px !important`,
     height: `${fabWidth + 30}px !important`,
+  },
+  fabBorderSvg: {
+    position: 'absolute',
+    width: fabWidth + 50,
+    height: fabWidth + 50,
+    color: '#FF4384',
   },
 });
 
@@ -71,12 +85,22 @@ export default function WorkCountdownMain(): JSX.Element {
         <Fab className={classes.fab} color="secondary">
           <PlayCircleFilledIcon className={classes.playCircleIcon} />
         </Fab>
+        <IconButton className={classes.iconButton} aria-label="Stop">
+          <StopIcon />
+        </IconButton>
+
         <CircularProgress
           className={classes.progress}
           variant="static"
           value={completed}
           thickness={1}
         />
+        <svg className={classes.fabBorderSvg} viewBox="22 22 44 44">
+          <circle
+            className="MuiCircularProgress-circle MuiCircularProgress-circleStatic"
+            cx="44" cy="44" r="21.5" fill="none" strokeWidth="0.2"
+          />
+        </svg>
       </div>
     </>
   );

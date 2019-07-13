@@ -33,7 +33,7 @@ export interface RouteComponentProps<P> {
   match: match<P>;
   loaction: H.Location;
   history: H.History;
-  staticContext?: any;
+  staticContext?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export interface Match<P> {

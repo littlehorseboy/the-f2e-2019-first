@@ -38,7 +38,18 @@ const useStyles = makeStyles({
   },
 });
 
-export default function PomodoroTime(): JSX.Element {
+interface Props {
+  selectedTask: {
+    taskId: string;
+    taskName: string;
+    workCount: number;
+    breakCount: number;
+    done: boolean;
+    doneTime: Date;
+  };
+}
+
+export default function PomodoroTime(props: Props): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -53,13 +64,14 @@ export default function PomodoroTime(): JSX.Element {
             />
           </svg>}
           checkedIcon={<CheckCircleIcon />}
+          checked={props.selectedTask.done}
         />
         <div>
           <Typography className={classes.pomodoroToDoText}>
-            THE FIRST THING TO DO TODAY
+            {props.selectedTask.taskName.toUpperCase()}
           </Typography>
           <div className={classes.circleContainer}>
-            <RadioButtonUncheckedIcon color="secondary" fontSize="small" />
+            {new Array(props.selectedTask.workCount).map((n, index): JSX.Element => <RadioButtonUncheckedIcon key={index} color="secondary" fontSize="small" />)}
             <RadioButtonUncheckedIcon color="secondary" fontSize="small" />
           </div>
         </div>

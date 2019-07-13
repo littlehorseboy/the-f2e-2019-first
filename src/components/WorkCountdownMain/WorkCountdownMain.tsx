@@ -2,14 +2,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import AddNewMission from '../UI/AddNewMission/AddNewMission';
-import PomodoroTime from './PomodoroTime/PomodoroTime';
-import ToDoListTopThree from './ToDoListTopThree/ToDoListTopThree';
+import LeftPane from './LeftPane/LeftPane';
 import MiddlePane from './MiddlePane/MiddlePane';
 import RightPane from './RightPane/RightPane';
 import { TasksInterface } from '../../pages/WorkCountdown/WorkCountdown';
-
-const fabWidth = 540;
 
 const useStyles = makeStyles({
   root: {
@@ -49,11 +45,7 @@ export default function WorkCountdownMain(props: Props): JSX.Element {
     <Container maxWidth={false} className={classes.root}>
       <Grid container spacing={0}>
         <Grid item xs={12} sm={5} className={classes.leftPane}>
-          <div>
-            <AddNewMission />
-            <PomodoroTime />
-            <ToDoListTopThree />
-          </div>
+          <LeftPane tasks={props.tasks} />
         </Grid>
 
         <Grid item xs={12} sm={6} className={classes.middlePane}>
