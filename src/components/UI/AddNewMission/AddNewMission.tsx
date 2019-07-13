@@ -33,7 +33,7 @@ export default function CustomizedInputBase(): JSX.Element {
     <Paper className={classes.root}>
       <InputBase
         className={classes.input}
-        placeholder="add a new mission…"
+        placeholder="ADD A NEW MISSION..."
         inputProps={{ 'aria-label': 'add a new mission…' }}
       />
       <IconButton className={classes.iconButton} aria-label="Search">

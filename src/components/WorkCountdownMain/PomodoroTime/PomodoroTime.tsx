@@ -19,9 +19,13 @@ const useStyles = makeStyles({
       height: '2.4em',
     },
   },
+  uncheckedIcon: {
+    color: '#003164',
+  },
   pomodoroToDoText: {
     color: '#003164',
-    fontSize: '2.2vw',
+    fontSize: '1.6vw',
+    fontWeight: 'bold',
   },
   circleContainer: {
     '& svg': {
@@ -30,6 +34,7 @@ const useStyles = makeStyles({
   },
   timeText: {
     fontSize: '14vw',
+    fontWeight: 'bold',
   },
 });
 
@@ -41,12 +46,17 @@ export default function PomodoroTime(): JSX.Element {
       <div className={classes.checkboxContainer}>
         <Checkbox
           className={classes.bigCheckbox}
-          icon={<RadioButtonUncheckedIcon />}
+          icon={<svg className={classes.uncheckedIcon} viewBox="22 22 44 44">
+            <circle
+              className="MuiCircularProgress-circle MuiCircularProgress-circleStatic"
+              cx="44" cy="44" r="17.5" fill="none" strokeWidth="3"
+            />
+          </svg>}
           checkedIcon={<CheckCircleIcon />}
         />
         <div>
           <Typography className={classes.pomodoroToDoText}>
-            the First thing to do today
+            THE FIRST THING TO DO TODAY
           </Typography>
           <div className={classes.circleContainer}>
             <RadioButtonUncheckedIcon color="secondary" fontSize="small" />

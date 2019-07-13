@@ -16,6 +16,11 @@ const useStyles = makeStyles({
   root: {
 
   },
+  listItemText: {
+    '& > span': {
+      fontSize: '1.2rem',
+    },
+  },
   buttonContainer: {
     textAlign: 'right',
   },
@@ -35,7 +40,10 @@ export default function ToDoListTopThree(): JSX.Element {
               checkedIcon={<CheckCircleIcon />}
             />
           </ListItemIcon>
-          <ListItemText primary="the second thing to do today" />
+          <ListItemText
+            className={classes.listItemText}
+            primary="the second thing to do today"
+          />
           <ListItemSecondaryAction>
             <IconButton edge="end" aria-label="Play">
               <PlayCircleOutlineIcon />
@@ -51,7 +59,10 @@ export default function ToDoListTopThree(): JSX.Element {
               checkedIcon={<CheckCircleIcon />}
             />
           </ListItemIcon>
-          <ListItemText primary="the third thing to do today" />
+          <ListItemText
+            className={classes.listItemText}
+            primary="the third thing to do today"
+          />
           <ListItemSecondaryAction>
             <IconButton edge="end" aria-label="Play">
               <PlayCircleOutlineIcon />
@@ -67,7 +78,10 @@ export default function ToDoListTopThree(): JSX.Element {
               checkedIcon={<CheckCircleIcon />}
             />
           </ListItemIcon>
-          <ListItemText primary="the forth thing to do today" />
+          <ListItemText
+            className={classes.listItemText}
+            primary="the forth thing to do today"
+          />
           <ListItemSecondaryAction>
             <IconButton edge="end" aria-label="Play">
               <PlayCircleOutlineIcon />
