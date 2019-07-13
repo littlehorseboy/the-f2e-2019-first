@@ -30,10 +30,11 @@ export default function WorkCountdown(props: Props): JSX.Element {
 
   return (
     <>
-      {/* {!params.get('taskId')
+      {props.location.pathname === '/'
+        && !params.get('taskId')
         && tasks[0]
         && tasks[0].taskId
-        && <Redirect to={`/?taskId=${tasks[0].taskId}`} />} */}
+        && <Redirect to={`/?taskId=${tasks[0].taskId}`} />}
       <WorkCountdownMain tasks={tasks} selectedTaskId={params.get('taskId')} />
     </>
   );

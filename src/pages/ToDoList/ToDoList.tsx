@@ -13,8 +13,7 @@ export default function ToDoList(): JSX.Element {
 
   return (
     <>
-      <div>123</div>
-      {/* <ToDoListMain tasks={tasks} /> */}
+      <ToDoListMain tasks={tasks} />
     </>
   );
 }
