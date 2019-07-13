@@ -1,11 +1,11 @@
 import React from 'react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 
-const useStyles = makeStyles(createStyles({
+const useStyles = makeStyles({
   root: {
     padding: '2px 4px',
     display: 'flex',
@@ -24,7 +24,7 @@ const useStyles = makeStyles(createStyles({
   iconButton: {
     padding: 10,
   },
-}));
+});
 
 export default function CustomizedInputBase(): JSX.Element {
   const classes = useStyles();

@@ -5,7 +5,6 @@ import H from 'history';
 import { Match } from '../../router/Router';
 import WorkCountdownMain from '../../components/WorkCountdownMain/WorkCountdownMain';
 
-
 interface Props {
   match: Match<object> | null;
   location: H.Location;

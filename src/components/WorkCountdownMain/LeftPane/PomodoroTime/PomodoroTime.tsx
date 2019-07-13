@@ -1,16 +1,21 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import Checkbox from '@material-ui/core/Checkbox';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import { Typography } from '@material-ui/core';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme): Record<'root' | 'checkboxContainer' | 'bigCheckbox'
+| 'uncheckedIcon' | 'pomodoroToDoText' | 'timeText', CSSProperties | (() => CSSProperties)> => createStyles({
   root: {
-
+    [theme.breakpoints.down('sm')]: {
+      marginTop: 50,
+    },
   },
   checkboxContainer: {
     display: 'flex',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   bigCheckbox: {
@@ -25,18 +30,19 @@ const useStyles = makeStyles({
   pomodoroToDoText: {
     color: '#003164',
     fontSize: '1.6vw',
-    fontWeight: 'bold',
-  },
-  circleContainer: {
-    '& svg': {
-
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '4vw',
     },
+    fontWeight: 'bold',
   },
   timeText: {
     fontSize: '14vw',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '20vw',
+    },
     fontWeight: 'bold',
   },
-});
+}));
 
 interface Props {
   selectedTask: {
@@ -70,7 +76,7 @@ export default function PomodoroTime(props: Props): JSX.Element {
           <Typography className={classes.pomodoroToDoText}>
             {props.selectedTask.taskName.toUpperCase()}
           </Typography>
-          <div className={classes.circleContainer}>
+          <div>
             {new Array(props.selectedTask.workCount).map((n, index): JSX.Element => <RadioButtonUncheckedIcon key={index} color="secondary" fontSize="small" />)}
             <RadioButtonUncheckedIcon color="secondary" fontSize="small" />
           </div>

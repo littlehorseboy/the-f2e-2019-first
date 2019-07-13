@@ -15,16 +15,6 @@ const useStyles = makeStyles({
   },
   leftPane: {
     backgroundColor: '#FFEDF7',
-    '& > div': {
-      paddingLeft: 85,
-      paddingRight: 30,
-      paddingTop: 48,
-      paddingBottom: 48,
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-    },
   },
   middlePane: {
     position: 'relative',
@@ -44,15 +34,15 @@ export default function WorkCountdownMain(props: Props): JSX.Element {
   return (
     <Container maxWidth={false} className={classes.root}>
       <Grid container spacing={0}>
-        <Grid item xs={12} sm={5} className={classes.leftPane}>
+        <Grid item xs={12} sm={12} md={5} className={classes.leftPane}>
           <LeftPane tasks={props.tasks} />
         </Grid>
 
-        <Grid item xs={12} sm={6} className={classes.middlePane}>
+        <Grid item xs={12} sm={12} md={6} className={classes.middlePane}>
           <MiddlePane />
         </Grid>
 
-        <Grid item xs={12} sm={1} className={classes.rightPane}>
+        <Grid item xs={12} sm={12} md={1} className={classes.rightPane}>
           <RightPane />
         </Grid>
       </Grid>
