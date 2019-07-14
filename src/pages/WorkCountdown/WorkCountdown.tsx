@@ -1,8 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import WorkCountdownMain from '../../components/WorkCountdownMain/WorkCountdownMain';
 import { MatchLocationProps } from '../../router/Router';
+import { changeCurrentTaskId } from '../../actions/toDoList/toDoListSelected';
 
 export interface TaskInterface {
   taskId: string;
@@ -14,22 +15,39 @@ export interface TaskInterface {
 }
 
 export default function WorkCountdown(props: MatchLocationProps): JSX.Element {
-  const params = new URLSearchParams(props.location.search);
+  const tasks = useSelector((
+    state: { toDoListReducer: { tasks: TaskInterface[] } },
+  ): TaskInterface[] => state.toDoListReducer.tasks);
 
-  const tasks = useSelector(
-    (
-      state: { toDoListReducer: { tasks: TaskInterface[] } },
-    ): TaskInterface[] => state.toDoListReducer.tasks,
-  );
+  const currentTaskId = useSelector((
+    state: { toDoListSelectedReducer: { taskId: string } },
+  ): string => state.toDoListSelectedReducer.taskId);
+
+  const searchParams = new URLSearchParams(props.location.search);
+
+  // 沒有指定路由的時候 會去撈資料列的第一筆資料 或是 紀錄中的 currentTaskId
+  let redirectDOM;
+
+  if (props.location.pathname === '/') {
+    if (!searchParams.get('taskId')) {
+      if (currentTaskId) {
+        redirectDOM = <Redirect to={`/?taskId=${currentTaskId}`} />;
+      } else if (tasks[0] && tasks[0].taskId) {
+        redirectDOM = <Redirect to={`/?taskId=${tasks[0].taskId}`} />;
+      }
+    }
+  }
+
+  const dispatch = useDispatch();
+
+  if (searchParams.get('taskId')) {
+    dispatch(changeCurrentTaskId(searchParams.get('taskId') as string));
+  }
 
   return (
     <>
-      {props.location.pathname === '/'
-        && !params.get('taskId')
-        && tasks[0]
-        && tasks[0].taskId
-        && <Redirect to={`/?taskId=${tasks[0].taskId}`} />}
-      <WorkCountdownMain tasks={tasks} selectedTaskId={params.get('taskId')} />
+      {redirectDOM}
+      <WorkCountdownMain tasks={tasks} selectedTaskId={searchParams.get('taskId')} />
     </>
   );
 }

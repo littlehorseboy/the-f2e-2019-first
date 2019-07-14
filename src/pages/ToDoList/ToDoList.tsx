@@ -5,11 +5,9 @@ import { TaskInterface } from '../WorkCountdown/WorkCountdown';
 import { MatchLocationProps } from '../../router/Router';
 
 export default function ToDoList(props: MatchLocationProps): JSX.Element {
-  const tasks = useSelector(
-    (
-      state: { toDoListReducer: { tasks: TaskInterface[] } },
-    ): TaskInterface[] => state.toDoListReducer.tasks,
-  );
+  const tasks = useSelector((
+    state: { toDoListReducer: { tasks: TaskInterface[] } },
+  ): TaskInterface[] => state.toDoListReducer.tasks);
 
   return (
     <>
