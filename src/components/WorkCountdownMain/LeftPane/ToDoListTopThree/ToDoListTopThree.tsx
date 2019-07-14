@@ -59,7 +59,7 @@ export default function ToDoListTopThree(props: Props): JSX.Element {
             </ListItemIcon>
             <ListItemText
               className={classes.listItemText}
-              primary={task.taskName}
+              primary={task.taskName.toUpperCase()}
             />
             <ListItemSecondaryAction>
               <IconButton edge="end" aria-label="Play">
