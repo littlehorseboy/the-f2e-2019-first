@@ -26,8 +26,6 @@ export default function MiddlePane(props: Props): JSX.Element {
 
   return (
     <div className={classes.root}>
-      <AddNewMission />
-
       <ToDoListExpansionPanel tasks={props.tasks} />
     </div>
   );

@@ -23,7 +23,7 @@ import { changeTaskDone } from '../../../../actions/toDoList/toDoList';
 const useStyles = makeStyles((theme: Theme): Record<'expansionPanels' | 'expansionPanel'
 | 'expansionPanelSummary' | 'heading' | 'listItem', CSSProperties | (() => CSSProperties)> => createStyles({
   expansionPanels: {
-    marginTop: theme.spacing(6),
+
   },
   expansionPanel: {
     backgroundColor: 'transparent',

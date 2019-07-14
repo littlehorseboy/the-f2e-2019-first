@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     fontFamily: 'system-ui, -apple-system, "Roboto", "Helvetica", "Arial", sans-serif',
     transition: 'opacity 250ms ease-in',
     '&-enter': {
-      opacity: 0.1,
+      opacity: 0.5,
     },
     '&-enter-done': {
       opacity: 1,
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
       opacity: 1,
     },
     '&-exit-done': {
-      opacity: 0.1,
+      opacity: 0.5,
     },
   },
 });

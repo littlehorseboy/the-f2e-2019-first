@@ -23,7 +23,7 @@ import { changeTaskDone } from '../../../../actions/toDoList/toDoList';
 const useStyles = makeStyles((theme: Theme): Record<'expansionPanels' | 'expansionPanel'
 | 'expansionPanelSummary' | 'heading' | 'listItem', CSSProperties | (() => CSSProperties)> => createStyles({
   expansionPanels: {
-    marginTop: theme.spacing(6),
+
   },
   expansionPanel: {
     backgroundColor: 'transparent',
@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme: Theme): Record<'expansionPanels' | 'expansi
   heading: {
     fontSize: theme.typography.pxToRem(20),
     fontWeight: 'bold',
+    flexGrow: 1,
   },
   listItem: {
     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
@@ -64,7 +65,7 @@ export default function MiddlePane(props: Props): JSX.Element {
           className={classes.expansionPanelSummary}
           expandIcon={<ExpandMoreIcon />}
         >
-          <Typography className={classes.heading}>TO-DO</Typography>
+          <Typography className={classes.heading}>FOCUS TIME</Typography>
         </ExpansionPanelSummary>
 
         <List disablePadding>
@@ -94,12 +95,19 @@ export default function MiddlePane(props: Props): JSX.Element {
         </List>
       </ExpansionPanel>
 
-      <ExpansionPanel className={classes.expansionPanel}>
+      <ExpansionPanel className={classes.expansionPanel} defaultExpanded={true}>
         <ExpansionPanelSummary
           className={classes.expansionPanelSummary}
           expandIcon={<ExpandMoreIcon />}
         >
-          <Typography className={classes.heading}>DONE</Typography>
+          <Typography className={classes.heading}>CHART</Typography>
+          <Typography component="div">
+            &lt;
+            {`${new Date(2019, 6, 1).getFullYear()}.${new Date(2019, 6, 1).getMonth() + 1}.${new Date(2019, 6, 1).getDate()}`}
+            -
+            {`${new Date().getFullYear()}.${new Date().getMonth() + 1}.${new Date().getDate()}`}
+            &gt;
+          </Typography>
         </ExpansionPanelSummary>
 
         <List disablePadding>
