@@ -65,13 +65,13 @@ export default function RightPane(): JSX.Element {
           </IconButton>
         </Link>
 
-        <Link to="/todolist" className={classes.iconButton}>
+        <Link to="/analytics" className={classes.iconButton}>
           <IconButton>
             <AssessmentIcon fontSize="large" />
           </IconButton>
         </Link>
 
-        <Link to="/todolist" className={classes.iconButton}>
+        <Link to="/ringtones" className={classes.iconButton}>
           <IconButton>
             <LibraryMusicIcon fontSize="large" />
           </IconButton>

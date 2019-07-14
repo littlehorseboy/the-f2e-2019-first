@@ -121,6 +121,7 @@ export default function MiddlePane(): JSX.Element {
         <CircularProgress
           className={classes.progress}
           variant="static"
+          color="secondary"
           value={completed}
           thickness={1}
         />

@@ -2,7 +2,6 @@ import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import ToDoListExpansionPanel from './ToDoListExpansionPanel/ToDoListExpansionPanel';
-import AddNewMission from '../../UI/AddNewMission/AddNewMission';
 import { TaskInterface } from '../../../pages/WorkCountdown/WorkCountdown';
 
 const useStyles = makeStyles((theme: Theme): Record<'root', CSSProperties | (() => CSSProperties)> => createStyles({

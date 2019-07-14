@@ -1,27 +1,15 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useRef, useEffect } from 'react';
+import Chart from 'chart.js';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import LensIcon from '@material-ui/icons/Lens';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { TaskInterface } from '../../../../pages/WorkCountdown/WorkCountdown';
-import { changeTaskDone } from '../../../../actions/toDoList/toDoList';
 
 const useStyles = makeStyles((theme: Theme): Record<'expansionPanels' | 'expansionPanel'
-| 'expansionPanelSummary' | 'heading' | 'listItem', CSSProperties | (() => CSSProperties)> => createStyles({
+| 'expansionPanelSummary' | 'heading' | 'focusTimeContainer', CSSProperties | (() => CSSProperties)> => createStyles({
   expansionPanels: {
 
   },
@@ -40,8 +28,27 @@ const useStyles = makeStyles((theme: Theme): Record<'expansionPanels' | 'expansi
     fontWeight: 'bold',
     flexGrow: 1,
   },
-  listItem: {
-    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+  focusTimeContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    '& > div > div:first-child': {
+      fontWeight: 'bold',
+    },
+    '& > div > div:last-child': {
+      fontWeight: 'bold',
+      '& > span:first-child': {
+        fontSize: '2.5rem',
+        color: '#FF4384',
+      },
+      '& > span:last-child': {
+        marginLeft: theme.spacing(0.25),
+        color: 'rgba(255, 255, 255, 0.2)',
+      },
+    },
   },
 }));
 
@@ -52,11 +59,24 @@ interface Props {
 export default function MiddlePane(props: Props): JSX.Element {
   const classes = useStyles();
 
-  const dispatch = useDispatch();
+  const canvasEl = useRef(null);
 
-  const handleChangeTaskDone = (task: TaskInterface): void => {
-    dispatch(changeTaskDone(task));
-  };
+  useEffect((): void => {
+    // eslint-disable-next-line no-new
+    new Chart(canvasEl.current as any, {
+      type: 'bar',
+      data: {
+        labels: ['7/1', '7/2', '7/3', '7/4', '7/5', '7/6', '7/7'],
+        datasets: [{
+          label: 'TOMATOS',
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          data: [0, 10, 5, 2, 20, 30, 45],
+        }],
+      },
+      options: {},
+    });
+  }, []);
 
   return (
     <div className={classes.expansionPanels}>
@@ -68,31 +88,22 @@ export default function MiddlePane(props: Props): JSX.Element {
           <Typography className={classes.heading}>FOCUS TIME</Typography>
         </ExpansionPanelSummary>
 
-        <List disablePadding>
-          {props.tasks
-            .filter((task): boolean => !task.done)
-            .map((task): JSX.Element => <ListItem
-              key={task.taskId}
-              className={classes.listItem}
-              dense button divider
-            >
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  icon={<RadioButtonUncheckedIcon />}
-                  checkedIcon={<CheckCircleOutlineIcon />}
-                  checked={task.done}
-                  onChange={(): void => handleChangeTaskDone(task)}
-                />
-              </ListItemIcon>
-              <ListItemText primary={task.taskName.toUpperCase()} />
-              <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="Play">
-                  <PlayCircleOutlineIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>)}
-        </List>
+        <div className={classes.focusTimeContainer}>
+          <div>
+            <div>TODAY</div>
+            <div>
+              <span>20</span>
+              <span>/TOMATO</span>
+            </div>
+          </div>
+          <div>
+            <div>WEEK</div>
+            <div>
+              <span>108</span>
+              <span>/TOMATO</span>
+            </div>
+          </div>
+        </div>
       </ExpansionPanel>
 
       <ExpansionPanel className={classes.expansionPanel} defaultExpanded={true}>
@@ -110,29 +121,7 @@ export default function MiddlePane(props: Props): JSX.Element {
           </Typography>
         </ExpansionPanelSummary>
 
-        <List disablePadding>
-          {props.tasks
-            .filter((task): boolean => task.done)
-            .map((task): JSX.Element => <ListItem
-              key={task.taskId}
-              className={classes.listItem}
-              dense button divider
-            >
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  icon={<RadioButtonUncheckedIcon />}
-                  checkedIcon={<CheckCircleOutlineIcon />}
-                  checked={task.done}
-                  onChange={(): void => handleChangeTaskDone(task)}
-                />
-              </ListItemIcon>
-              <ListItemText primary={task.taskName.toUpperCase()} />
-              <ListItemSecondaryAction>
-                {new Array(task.workCount).fill('').map((n, index): JSX.Element => <LensIcon key={index} fontSize="small" />)}
-              </ListItemSecondaryAction>
-            </ListItem>)}
-        </List>
+        <canvas ref={canvasEl}></canvas>
       </ExpansionPanel>
     </div>
   );
