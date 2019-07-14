@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import BigLinkMenu from '../UI/BigLinkMenu/BigLinkMenu';
 import MiddlePane from './MiddlePane/MiddlePane';
-import RightPane from './RightPane/RightPane';
+import BackHomePane from '../UI/BackHomePane/BackHomePane';
 import { TaskInterface } from '../../pages/WorkCountdown/WorkCountdown';
 import { MatchLocationProps } from '../../router/Router';
 
@@ -38,7 +38,7 @@ export default function ToDoListMain(props: Props): JSX.Element {
 
         <Grid item xs={12} sm={12} md={1}>
           {/* right pane */}
-          <RightPane />
+          <BackHomePane />
         </Grid>
       </Grid>
     </Container>
