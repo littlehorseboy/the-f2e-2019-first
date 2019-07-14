@@ -5,10 +5,14 @@ import H from 'history';
 import { makeStyles } from '@material-ui/core/styles';
 import WorkCountdown from '../pages/WorkCountdown/WorkCountdown';
 import ToDoList from '../pages/ToDoList/ToDoList';
+import Analytics from '../pages/Analytics/Analytics';
+import Ringtones from '../pages/Ringtones/Ringtones';
 
 const routes = [
   { path: '/', Component: WorkCountdown },
   { path: '/todolist', Component: ToDoList },
+  { path: '/analytics', Component: Analytics },
+  { path: '/ringtones', Component: Ringtones },
 ];
 
 const useStyles = makeStyles({
