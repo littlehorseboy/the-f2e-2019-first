@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme): Record<'root' | 'rightPaneTop' | 'r
   },
 }));
 
-export default function WorkCountdownMain(): JSX.Element {
+export default function RightPane(): JSX.Element {
   const classes = useStyles();
 
   return (

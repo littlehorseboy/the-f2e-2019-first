@@ -28,7 +28,7 @@ interface Props {
   selectedTaskId: string | null;
 }
 
-export default function WorkCountdownMain(props: Props): JSX.Element {
+export default function LeftPane(props: Props): JSX.Element {
   const classes = useStyles();
 
   const selectedTask = props.tasks

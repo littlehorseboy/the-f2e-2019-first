@@ -9,7 +9,6 @@ import ToDoList from '../pages/ToDoList/ToDoList';
 const routes = [
   { path: '/', Component: WorkCountdown },
   { path: '/todolist', Component: ToDoList },
-
 ];
 
 const useStyles = makeStyles({
@@ -43,6 +42,11 @@ export interface Match<P> {
   isExact: boolean;
   path: string;
   url: string;
+}
+
+export interface MatchLocationProps {
+  match: Match<object> | null;
+  location: H.Location;
 }
 
 export default function Router(): JSX.Element {

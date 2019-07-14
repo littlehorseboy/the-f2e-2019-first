@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme: Theme): Record<'middleContaiberPane' | 'mid
   },
 }));
 
-export default function WorkCountdownMain(): JSX.Element {
+export default function MiddlePane(): JSX.Element {
   const classes = useStyles();
 
   const [completed, setCompleted] = useState(0);

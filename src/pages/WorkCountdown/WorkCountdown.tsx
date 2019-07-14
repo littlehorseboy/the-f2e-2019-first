@@ -1,14 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import H from 'history';
-import { Match } from '../../router/Router';
 import WorkCountdownMain from '../../components/WorkCountdownMain/WorkCountdownMain';
-
-interface Props {
-  match: Match<object> | null;
-  location: H.Location;
-}
+import { MatchLocationProps } from '../../router/Router';
 
 export interface TaskInterface {
   taskId: string;
@@ -19,7 +13,7 @@ export interface TaskInterface {
   doneTime: Date | null;
 }
 
-export default function WorkCountdown(props: Props): JSX.Element {
+export default function WorkCountdown(props: MatchLocationProps): JSX.Element {
   const params = new URLSearchParams(props.location.search);
 
   const tasks = useSelector(

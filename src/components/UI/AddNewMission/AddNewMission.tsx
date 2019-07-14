@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CustomizedInputBase(): JSX.Element {
+export default function AddNewMission(): JSX.Element {
   const classes = useStyles();
 
   const [taskName, setTaskName] = useState('');

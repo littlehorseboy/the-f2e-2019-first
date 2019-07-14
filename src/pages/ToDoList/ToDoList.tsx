@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import ToDoListMain from '../../components/ToDoListMain/ToDoListMain';
 import { TaskInterface } from '../WorkCountdown/WorkCountdown';
+import { MatchLocationProps } from '../../router/Router';
 
-
-export default function ToDoList(): JSX.Element {
+export default function ToDoList(props: MatchLocationProps): JSX.Element {
   const tasks = useSelector(
     (
       state: { toDoListReducer: { tasks: TaskInterface[] } },
@@ -13,7 +13,7 @@ export default function ToDoList(): JSX.Element {
 
   return (
     <>
-      <ToDoListMain tasks={tasks} />
+      <ToDoListMain tasks={tasks} match={props.match} location={props.location} />
     </>
   );
 }

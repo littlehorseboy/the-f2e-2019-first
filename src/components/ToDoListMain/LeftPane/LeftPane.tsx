@@ -34,7 +34,7 @@ interface Props extends MatchLocationProps {
   tasks: TaskInterface[];
 }
 
-export default function ToDoListMain(props: Props): JSX.Element {
+export default function LeftPane(props: Props): JSX.Element {
   const classes = useStyles();
 
   return (
