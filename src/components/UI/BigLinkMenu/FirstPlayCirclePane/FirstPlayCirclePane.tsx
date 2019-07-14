@@ -48,11 +48,17 @@ const useStyles = makeStyles((theme: Theme): Record<'firstPlayCirclePane' | 'pla
   },
   ponodoroTime: {
     fontSize: '5rem',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '4rem',
+    },
     fontWeight: 'bold',
     color: '#FF4384',
   },
   taskName: {
     fontSize: '1.2rem',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1rem',
+    },
     fontWeight: 'bold',
     color: '#003164',
   },

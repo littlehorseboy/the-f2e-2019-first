@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme): Record<'root' | 'link' | 'button' |
   },
 }));
 
-export default function LeftPane(props: MatchLocationProps): JSX.Element {
+export default function BigLinkMenu(props: MatchLocationProps): JSX.Element {
   const classes = useStyles();
 
   return (
