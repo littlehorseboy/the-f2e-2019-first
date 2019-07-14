@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 
   },
   middlePane: {
-    paddingRight: '3rem',
+
   },
   rightPane: {
   },

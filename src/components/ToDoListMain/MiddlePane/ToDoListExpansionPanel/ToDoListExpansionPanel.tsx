@@ -21,7 +21,7 @@ import { TaskInterface } from '../../../../pages/WorkCountdown/WorkCountdown';
 import { changeTaskDone } from '../../../../actions/toDoList/toDoList';
 
 const useStyles = makeStyles((theme: Theme): Record<'expansionPanels' | 'expansionPanel'
-| 'expansionPanelSummary' | 'heading', CSSProperties | (() => CSSProperties)> => createStyles({
+| 'expansionPanelSummary' | 'heading' | 'listItem', CSSProperties | (() => CSSProperties)> => createStyles({
   expansionPanels: {
     marginTop: theme.spacing(6),
   },
@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme: Theme): Record<'expansionPanels' | 'expansi
   heading: {
     fontSize: theme.typography.pxToRem(20),
     fontWeight: 'bold',
+  },
+  listItem: {
+    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
   },
 }));
 
@@ -67,7 +70,11 @@ export default function MiddlePane(props: Props): JSX.Element {
         <List disablePadding>
           {props.tasks
             .filter((task): boolean => !task.done)
-            .map((task): JSX.Element => <ListItem key={task.taskId} dense button divider>
+            .map((task): JSX.Element => <ListItem
+              key={task.taskId}
+              className={classes.listItem}
+              dense button divider
+            >
               <ListItemIcon>
                 <Checkbox
                   edge="start"
@@ -98,7 +105,11 @@ export default function MiddlePane(props: Props): JSX.Element {
         <List disablePadding>
           {props.tasks
             .filter((task): boolean => task.done)
-            .map((task): JSX.Element => <ListItem key={task.taskId} dense button divider>
+            .map((task): JSX.Element => <ListItem
+              key={task.taskId}
+              className={classes.listItem}
+              dense button divider
+            >
               <ListItemIcon>
                 <Checkbox
                   edge="start"

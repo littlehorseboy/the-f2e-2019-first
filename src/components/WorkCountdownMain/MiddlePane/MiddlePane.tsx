@@ -48,7 +48,6 @@ const useStyles = makeStyles((theme: Theme): Record<'middleContaiberPane' | 'mid
       height: theme.spacing(40),
     },
     border: '3px solid transparent',
-    outline: '3px solid transparent',
     zIndex: 1,
   },
   playCircleIcon: {
