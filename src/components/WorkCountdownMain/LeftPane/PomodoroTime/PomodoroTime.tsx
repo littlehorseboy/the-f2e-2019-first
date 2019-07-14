@@ -91,7 +91,7 @@ export default function PomodoroTime(props: Props): JSX.Element {
             {selectedTask.taskName.toUpperCase()}
           </Typography>
           <div>
-            {new Array(selectedTask.workCount).map((n, index): JSX.Element => <RadioButtonUncheckedIcon key={index} color="secondary" fontSize="small" />)}
+            {new Array(selectedTask.workCount).fill('').map((n, index): JSX.Element => <RadioButtonUncheckedIcon key={index} color="secondary" fontSize="small" />)}
             <RadioButtonUncheckedIcon color="secondary" fontSize="small" />
           </div>
         </div>

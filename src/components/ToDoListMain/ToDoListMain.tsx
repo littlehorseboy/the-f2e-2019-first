@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 
   },
   middlePane: {
-    position: 'relative',
+    paddingRight: '3rem',
   },
   rightPane: {
   },
@@ -40,7 +40,7 @@ export default function ToDoListMain(props: Props): JSX.Element {
         </Grid>
 
         <Grid item xs={12} sm={12} md={6} className={classes.middlePane}>
-          <MiddlePane />
+          <MiddlePane tasks={props.tasks} />
         </Grid>
 
         <Grid item xs={12} sm={12} md={1} className={classes.rightPane}>
