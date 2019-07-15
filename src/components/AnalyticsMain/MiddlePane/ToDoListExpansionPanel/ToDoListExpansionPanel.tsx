@@ -59,11 +59,11 @@ interface Props {
 export default function MiddlePane(props: Props): JSX.Element {
   const classes = useStyles();
 
-  const canvasEl = useRef(null);
+  const canvasEl = useRef<HTMLCanvasElement>(null);
 
   useEffect((): void => {
     // eslint-disable-next-line no-new
-    new Chart(canvasEl.current as any, {
+    new Chart(canvasEl.current as HTMLCanvasElement, {
       type: 'bar',
       data: {
         labels: ['7/1', '7/2', '7/3', '7/4', '7/5', '7/6', '7/7'],
