@@ -1,9 +1,11 @@
 import React from 'react';
-// import classNames from 'classnames';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import Fab from '@material-ui/core/Fab';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import { TaskInterface } from '../../../../pages/WorkCountdown/WorkCountdown';
 
 const useStyles = makeStyles((theme: Theme): Record<'firstPlayCirclePane' | 'playCircle'
 | 'playCircleContent' | 'ponodoroTime' | 'taskName' | 'fabContainer' | 'fab' | 'playArrowIcon'
@@ -78,20 +80,26 @@ const useStyles = makeStyles((theme: Theme): Record<'firstPlayCirclePane' | 'pla
 export default function LeftPane(): JSX.Element {
   const classes = useStyles();
 
+  const tasks = useSelector((
+    state: { toDoListReducer: { tasks: TaskInterface[] } },
+  ): TaskInterface[] => state.toDoListReducer.tasks);
+
   return (
     <div className={classes.firstPlayCirclePane}>
       <div className={classes.playCircle}>
         <div className={classes.fabContainer}>
-          <Fab className={classes.fab} color="secondary">
-            <PlayArrowIcon className={classes.playArrowIcon} />
-          </Fab>
+          <Link to={`/?taskId=${tasks[0].taskId}`}>
+            <Fab className={classes.fab} color="secondary">
+              <PlayArrowIcon className={classes.playArrowIcon} />
+            </Fab>
+          </Link>
         </div>
         <div className={classes.playCircleContent}>
           <div className={classes.ponodoroTime}>
             25:00
           </div>
           <div className={classes.taskName}>
-            {'the First thing to do today'.toUpperCase()}
+            {tasks[0].taskName.toUpperCase()}
           </div>
         </div>
       </div>

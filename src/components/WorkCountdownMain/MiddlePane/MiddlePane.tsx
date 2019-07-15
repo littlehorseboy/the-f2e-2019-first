@@ -6,6 +6,7 @@ import Fab from '@material-ui/core/Fab';
 import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import PauseCircleFilledIcon from '@material-ui/icons/PauseCircleFilled';
 import StopIcon from '@material-ui/icons/Stop';
 
 const useStyles = makeStyles((theme: Theme): Record<'middleContaiberPane' | 'middleLeftPane'
@@ -88,21 +89,36 @@ const useStyles = makeStyles((theme: Theme): Record<'middleContaiberPane' | 'mid
   },
 }));
 
-export default function MiddlePane(): JSX.Element {
+interface Props {
+  changeCountdownStatus: (status: 'play' | 'pause' | 'stop') => void;
+  countdownStatus: string;
+  time: number;
+  originSeconds: number;
+}
+
+export default function MiddlePane(props: Props): JSX.Element {
   const classes = useStyles();
 
   const [completed, setCompleted] = useState(0);
 
-  useEffect((): () => void => {
-    const timer = setInterval((): void => {
-      setCompleted(
-        (prevCompleted: number): number => (prevCompleted >= 100 ? 0 : prevCompleted + 5),
-      );
-    }, 500);
-    return (): void => {
-      clearInterval(timer);
-    };
-  }, []);
+  // useEffect((): () => void => {
+  //   const timer = setInterval((): void => {
+  //     setCompleted(
+  //       (prevCompleted: number): number => (prevCompleted >= 100 ? 0 : prevCompleted + 5),
+  //     );
+  //   }, 500);
+  //   return (): void => {
+  //     clearInterval(timer);
+  //   };
+  // }, []);
+
+  useEffect((): void => {
+    setCompleted(
+      (prevCompleted: number): number => (
+        prevCompleted >= 100 ? 0 : 100 / props.originSeconds * (props.originSeconds - props.time)
+      ),
+    );
+  }, [props.time]);
 
   return (
     <>
@@ -111,10 +127,18 @@ export default function MiddlePane(): JSX.Element {
         <Grid item xs={12} sm={12} md={6} className={classes.middleRightPane}></Grid>
       </Grid>
       <div className={classes.fabContainer}>
-        <Fab className={classes.fab} color="secondary">
-          <PlayCircleFilledIcon className={classes.playCircleIcon} />
+        <Fab className={classes.fab} color="secondary" onClick={(): void => {
+          if (props.countdownStatus === 'play') {
+            props.changeCountdownStatus('pause');
+          } else {
+            props.changeCountdownStatus('play');
+          }
+        }}>
+          {(props.countdownStatus === 'pause' || props.countdownStatus === 'stop') && <PlayCircleFilledIcon className={classes.playCircleIcon} />}
+          {props.countdownStatus === 'play' && <PauseCircleFilledIcon className={classes.playCircleIcon} />}
         </Fab>
-        <IconButton className={classes.iconButton} aria-label="Stop">
+
+        <IconButton className={classes.iconButton} aria-label="Stop" onClick={(): void => props.changeCountdownStatus('stop')}>
           <StopIcon />
         </IconButton>
 

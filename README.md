@@ -4,7 +4,7 @@
 
 - [x] 我可以記錄待辦任務
 - [ ] 我可以設定蕃茄鐘定時器
-- [ ] 我可以透過報表檢視使用狀況
+- [x] 我可以透過報表檢視使用狀況
 
 ### Functional map
 
@@ -18,14 +18,14 @@
  - [ ] 短休息時間：5 分鐘
  - 時間倒數介面
  - [x] 顯示進行中待辦事項
- - [ ] 有開始鍵能啟動倒數
- - [ ] 能暫停倒數
- - [ ] 能略過倒數（作廢）
- - [ ] 顯示倒數時間
+ - [x] 有開始鍵能啟動倒數
+ - [X] 能暫停倒數
+ - [X] 能略過倒數（作廢）
+ - [x] 顯示倒數時間
  - [ ] 提示鈴聲選項
 - 狀態報表
- - [ ] 當天使用蕃茄鐘的記錄與成效
- - [ ] 當週使用蕃茄鐘的記錄與成效 
+ - [x] 當天使用蕃茄鐘的記錄與成效
+ - [x] 當週使用蕃茄鐘的記錄與成效 
 
 ### TODO
 
@@ -33,9 +33,10 @@
 - [ ] Storybook showcase components
 - [x] PomodoroTime.tsx workCount 顯示
 - [x] ToDoListTopThree.tsx 播放按鈕加入 Link 改變 taskId，MORE 按鈕也要加 Link
-- [ ] MiddlePane.tsx 大顆按鈕 開始 暫停 結束 進度條
+- [x] MiddlePane.tsx 大顆按鈕 開始 暫停 結束 進度條
+- [ ] MiddlePane.tsx 大顆按鈕 時間到要累計 workCount，跳轉到 break 模式
 - [ ] WorkCountdownMain.tsx 整體的紅色要能切換藍色
-- [ ] FirstPlayCirclePane.tsx 播放按鈕加入 Link，目前是假資料
+- [x] FirstPlayCirclePane.tsx 播放按鈕加入 Link
 - [ ] ToDoListExpansionPanel.tsx 能排序就太好了
 - [x] AnalyticsMain.tsx 搭配 redux state
 - [ ] RingtonesMain.tsx 沒有聲音功能

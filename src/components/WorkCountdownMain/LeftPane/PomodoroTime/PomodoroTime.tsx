@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme: Theme): Record<'root' | 'checkboxContainer'
 
 interface Props {
   selectedTask: TaskInterface | undefined;
+  time: number;
 }
 
 export default function PomodoroTime(props: Props): JSX.Element {
@@ -108,7 +109,7 @@ export default function PomodoroTime(props: Props): JSX.Element {
         align="center"
         className={classes.timeText}
       >
-        25:00
+        {`${Math.floor(props.time / 60).toString().padStart(2, '0')}:${(props.time % 60).toString().padStart(2, '0')}`}
       </Typography>
     </div>
   );
