@@ -33,7 +33,7 @@ export default function RingtonesMain(props: Props): JSX.Element {
         </Grid>
 
         <Grid item xs={12} sm={12} md={6}>
-          <MiddlePane tasks={props.tasks} />
+          <MiddlePane />
         </Grid>
 
         <Grid item xs={12} sm={12} md={1}>
