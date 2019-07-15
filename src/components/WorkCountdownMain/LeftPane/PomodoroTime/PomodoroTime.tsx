@@ -3,14 +3,16 @@ import { useDispatch } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import Checkbox from '@material-ui/core/Checkbox';
+import Typography from '@material-ui/core/Typography';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import { Typography } from '@material-ui/core';
+import LensIcon from '@material-ui/icons/Lens';
 import { TaskInterface } from '../../../../pages/WorkCountdown/WorkCountdown';
 import { changeTaskDone } from '../../../../actions/toDoList/toDoList';
 
 const useStyles = makeStyles((theme: Theme): Record<'root' | 'checkboxContainer' | 'bigCheckbox'
-| 'uncheckedIcon' | 'pomodoroToDoText' | 'timeText', CSSProperties | (() => CSSProperties)> => createStyles({
+| 'uncheckedIcon' | 'pomodoroToDoText' | 'timeText' | 'lensIcon'
+, CSSProperties | (() => CSSProperties)> => createStyles({
   root: {
     [theme.breakpoints.down('sm')]: {
       marginTop: 50,
@@ -44,6 +46,9 @@ const useStyles = makeStyles((theme: Theme): Record<'root' | 'checkboxContainer'
       fontSize: '20vw',
     },
     fontWeight: 'bold',
+  },
+  lensIcon: {
+    color: '#003164',
   },
 }));
 
@@ -91,7 +96,8 @@ export default function PomodoroTime(props: Props): JSX.Element {
             {selectedTask.taskName.toUpperCase()}
           </Typography>
           <div>
-            {new Array(selectedTask.workCount).fill('').map((n, index): JSX.Element => <RadioButtonUncheckedIcon key={index} color="secondary" fontSize="small" />)}
+            {new Array(selectedTask.workCount).fill('')
+              .map((n, index): JSX.Element => <LensIcon key={index} className={classes.lensIcon} fontSize="small" />)}
             <RadioButtonUncheckedIcon color="secondary" fontSize="small" />
           </div>
         </div>

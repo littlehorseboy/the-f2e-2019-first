@@ -10,15 +10,15 @@ const initState: Tasks = {
     {
       taskId: '1',
       taskName: 'the First thing to do today',
-      workCount: 0,
-      breakCount: 0,
+      workCount: 2,
+      breakCount: 1,
       done: false,
       doneTime: null,
     },
     {
       taskId: '2',
       taskName: 'the second thing to do today',
-      workCount: 0,
+      workCount: 1,
       breakCount: 0,
       done: false,
       doneTime: null,
