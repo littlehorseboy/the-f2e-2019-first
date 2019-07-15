@@ -1,4 +1,10 @@
 import React, { useRef, useEffect } from 'react';
+import {
+  format,
+  subDays,
+  isSameDay,
+  differenceInDays,
+} from 'date-fns';
 import Chart from 'chart.js';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
@@ -62,16 +68,46 @@ export default function MiddlePane(props: Props): JSX.Element {
   const canvasEl = useRef<HTMLCanvasElement>(null);
 
   useEffect((): void => {
+    const currentDate = new Date();
+
     // eslint-disable-next-line no-new
     new Chart(canvasEl.current as HTMLCanvasElement, {
       type: 'bar',
       data: {
-        labels: ['7/1', '7/2', '7/3', '7/4', '7/5', '7/6', '7/7'],
+        labels: [
+          format(subDays(currentDate, 6), 'M/D'),
+          format(subDays(currentDate, 5), 'M/D'),
+          format(subDays(currentDate, 4), 'M/D'),
+          format(subDays(currentDate, 3), 'M/D'),
+          format(subDays(currentDate, 2), 'M/D'),
+          format(subDays(currentDate, 1), 'M/D'),
+          format(currentDate, 'M/D'),
+        ],
         datasets: [{
-          label: 'TOMATOS',
+          label: 'TOMATOES',
           backgroundColor: 'rgb(255, 99, 132)',
           borderColor: 'rgb(255, 99, 132)',
-          data: [0, 10, 5, 2, 20, 30, 45],
+          data: [
+            props.tasks.filter(
+              (task): boolean => differenceInDays(new Date(), task.doneTime as Date) === 6,
+            ).length,
+            props.tasks.filter(
+              (task): boolean => differenceInDays(new Date(), task.doneTime as Date) === 5,
+            ).length,
+            props.tasks.filter(
+              (task): boolean => differenceInDays(new Date(), task.doneTime as Date) === 4,
+            ).length,
+            props.tasks.filter(
+              (task): boolean => differenceInDays(new Date(), task.doneTime as Date) === 3,
+            ).length,
+            props.tasks.filter(
+              (task): boolean => differenceInDays(new Date(), task.doneTime as Date) === 2,
+            ).length,
+            props.tasks.filter(
+              (task): boolean => differenceInDays(new Date(), task.doneTime as Date) === 1,
+            ).length,
+            props.tasks
+              .filter((task): boolean => isSameDay(new Date(), task.doneTime as Date)).length],
         }],
       },
       options: {},
@@ -92,14 +128,22 @@ export default function MiddlePane(props: Props): JSX.Element {
           <div>
             <div>TODAY</div>
             <div>
-              <span>20</span>
+              <span>
+                {props.tasks.filter(
+                  (task): boolean => isSameDay(new Date(), task.doneTime as Date),
+                ).length}
+              </span>
               <span>/TOMATO</span>
             </div>
           </div>
           <div>
             <div>WEEK</div>
             <div>
-              <span>108</span>
+              <span>
+                {props.tasks.filter(
+                  (task): boolean => differenceInDays(new Date(), task.doneTime as Date) <= 7,
+                ).length}
+              </span>
               <span>/TOMATO</span>
             </div>
           </div>
@@ -114,9 +158,9 @@ export default function MiddlePane(props: Props): JSX.Element {
           <Typography className={classes.heading}>CHART</Typography>
           <Typography component="div">
             &lt;
-            {`${new Date(2019, 6, 1).getFullYear()}.${new Date(2019, 6, 1).getMonth() + 1}.${new Date(2019, 6, 1).getDate()}`}
+            {format(subDays(new Date(), 6), 'YYYY.M.D')}
             -
-            {`${new Date().getFullYear()}.${new Date().getMonth() + 1}.${new Date().getDate()}`}
+            {format(new Date(), 'YYYY.M.D')}
             &gt;
           </Typography>
         </ExpansionPanelSummary>

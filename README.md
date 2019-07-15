@@ -31,11 +31,12 @@
 
 - [ ] React Testing Library
 - [ ] Storybook showcase components
-- [ ] PomodoroTime.tsx workCount 顯示
-- [ ] ToDoListTopThree.tsx 播放按鈕加入 Link 改變 taskId，MORE 按鈕也要加 Link
+- [x] PomodoroTime.tsx workCount 顯示
+- [x] ToDoListTopThree.tsx 播放按鈕加入 Link 改變 taskId，MORE 按鈕也要加 Link
 - [ ] MiddlePane.tsx 大顆按鈕 開始 暫停 結束 進度條
 - [ ] WorkCountdownMain.tsx 整體的紅色要能切換藍色
 - [ ] FirstPlayCirclePane.tsx 播放按鈕加入 Link，目前是假資料
 - [ ] ToDoListExpansionPanel.tsx 能排序就太好了
-- [ ] AnalyticsMain.tsx 攏係假
-- [ ] RingtonesMain.tsx 攏係假，按鈕要記得換顏色
+- [x] AnalyticsMain.tsx 搭配 redux state
+- [ ] RingtonesMain.tsx 沒有聲音功能
+- [x] RingtonesMain.tsx 按鈕要記得換顏色

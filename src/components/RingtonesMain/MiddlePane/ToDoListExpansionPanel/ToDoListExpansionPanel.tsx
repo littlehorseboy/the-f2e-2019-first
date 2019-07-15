@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme: Theme): Record<'expansionPanels' | 'expansi
     '& svg': {
       color: '#FFFFFF',
     },
+    '& .Mui-checked svg': {
+      color: 'inherit',
+    },
   },
   expansionPanelSummary: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',

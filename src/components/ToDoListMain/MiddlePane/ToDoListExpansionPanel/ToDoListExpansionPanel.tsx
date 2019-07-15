@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -86,9 +87,11 @@ export default function MiddlePane(props: Props): JSX.Element {
               </ListItemIcon>
               <ListItemText primary={task.taskName.toUpperCase()} />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="Play">
-                  <PlayCircleOutlineIcon />
-                </IconButton>
+                <Link to={`/?taskId=${task.taskId}`}>
+                  <IconButton edge="end" aria-label="Play">
+                    <PlayCircleOutlineIcon />
+                  </IconButton>
+                </Link>
               </ListItemSecondaryAction>
             </ListItem>)}
         </List>

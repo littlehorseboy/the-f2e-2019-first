@@ -93,7 +93,7 @@ const initState: Tasks = {
       workCount: 2,
       breakCount: 1,
       done: true,
-      doneTime: new Date(2019, 6, 3),
+      doneTime: new Date(2019, 6, 8),
     },
     {
       taskId: '12',

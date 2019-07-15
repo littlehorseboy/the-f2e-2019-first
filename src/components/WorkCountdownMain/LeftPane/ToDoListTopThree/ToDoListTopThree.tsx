@@ -27,6 +27,9 @@ const useStyles = makeStyles({
   },
   buttonContainer: {
     textAlign: 'right',
+    '& > a': {
+      textDecoration: 'none',
+    },
   },
 });
 
@@ -72,7 +75,9 @@ export default function ToDoListTopThree(props: Props): JSX.Element {
           </ListItem>)}
       </List>
       <div className={classes.buttonContainer}>
-        <Button color="secondary">MORE</Button>
+        <Link to='/todolist'>
+          <Button color="secondary">MORE</Button>
+        </Link>
       </div>
     </div>
   );
