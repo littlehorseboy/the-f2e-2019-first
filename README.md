@@ -3,7 +3,7 @@
 ### User story
 
 - [x] 我可以記錄待辦任務
-- [ ] 我可以設定蕃茄鐘定時器
+- [x] 我可以設定蕃茄鐘定時器
 - [x] 我可以透過報表檢視使用狀況
 
 ### Functional map
@@ -35,8 +35,8 @@
 - [x] ToDoListTopThree.tsx 播放按鈕加入 Link 改變 taskId，MORE 按鈕也要加 Link
 - [x] MiddlePane.tsx 大顆按鈕 開始 暫停 結束 進度條
 - [x] MiddlePane.tsx 大顆按鈕 時間到要累計 workCount
-- [ ] MiddlePane.tsx 能切換到 break 模式
-- [ ] WorkCountdownMain.tsx 整體的紅色要能切換藍色
+- [x] MiddlePane.tsx 能切換到 break 模式
+- [x] WorkCountdownMain.tsx 整體的紅色要能切換藍色
 - [x] FirstPlayCirclePane.tsx 播放按鈕加入 Link
 - [ ] ToDoListExpansionPanel.tsx 能排序就太好了
 - [x] AnalyticsMain.tsx 搭配 redux state
