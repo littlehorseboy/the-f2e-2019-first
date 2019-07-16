@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -6,6 +7,7 @@ import LeftPane from './LeftPane/LeftPane';
 import MiddlePane from './MiddlePane/MiddlePane';
 import RightPane from './RightPane/RightPane';
 import { TaskInterface } from '../../pages/WorkCountdown/WorkCountdown';
+import { increaseTaskWorkCount } from '../../actions/toDoList/toDoList';
 
 const useStyles = makeStyles({
   root: {
@@ -39,6 +41,8 @@ export default function WorkCountdownMain(props: Props): JSX.Element {
   const [time, setTime] = useState(seconds);
   const [countdownStatus, setCountdownStatus] = useState<'play' | 'pause' | 'stop'>('pause');
 
+  const dispatch = useDispatch();
+
   useEffect((): void => {
     if (countdownStatus === 'play') {
       timer = setInterval((): void => {
@@ -46,6 +50,8 @@ export default function WorkCountdownMain(props: Props): JSX.Element {
         setTime(seconds);
 
         if (seconds <= 0) {
+          // horseTODO:
+          dispatch(increaseTaskWorkCount(props.tasks[0]));
           clearInterval(timer);
           setTimeout((): void => {
             seconds = originSeconds;

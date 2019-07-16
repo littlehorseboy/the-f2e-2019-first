@@ -1,4 +1,9 @@
-import { ADD_TASK, CHANGE_TASK_DONE, ToDoListActionI } from '../../actions/toDoList/toDoList';
+import {
+  ToDoListActionI,
+  ADD_TASK,
+  CHANGE_TASK_DONE,
+  INCREASE_TASK_WORKCOUNT,
+} from '../../actions/toDoList/toDoList';
 import { TaskInterface } from '../../pages/WorkCountdown/WorkCountdown';
 
 interface Tasks {
@@ -113,14 +118,17 @@ const reducer = (state = initState, action: ToDoListActionI): Tasks => {
     if (!findTask) {
       return state;
     }
-    state.tasks.splice(
-      state.tasks.findIndex((task): boolean => task.taskId === action.payload.task.taskId),
-      1,
-      Object.assign(
-        findTask,
-        { done: !findTask.done },
-      ),
-    );
+    Object.assign(findTask, { done: !findTask.done });
+    return state;
+  };
+
+  const increaseTaskWorkCount = (): Tasks => {
+    const findTask = state.tasks
+      .find((task): boolean => task.taskId === action.payload.task.taskId);
+    if (!findTask) {
+      return state;
+    }
+    Object.assign(findTask, { workCount: findTask.workCount + 1 });
     return state;
   };
 
@@ -136,6 +144,12 @@ const reducer = (state = initState, action: ToDoListActionI): Tasks => {
       return {
         tasks: [
           ...changeTaskDone().tasks,
+        ],
+      };
+    case INCREASE_TASK_WORKCOUNT:
+      return {
+        tasks: [
+          ...increaseTaskWorkCount().tasks,
         ],
       };
     default:
