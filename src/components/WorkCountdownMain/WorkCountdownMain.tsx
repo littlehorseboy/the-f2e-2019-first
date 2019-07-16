@@ -31,7 +31,7 @@ interface Props {
   selectedTaskId: string | null;
 }
 
-const originSeconds = 15;
+const originSeconds = 5;
 let seconds = originSeconds;
 let timer = setInterval((): void => {}, 10000);
 
@@ -43,6 +43,10 @@ export default function WorkCountdownMain(props: Props): JSX.Element {
 
   const dispatch = useDispatch();
 
+  const changeCountdownStatus = (status: 'play' | 'pause' | 'stop'): void => {
+    setCountdownStatus(status);
+  };
+
   useEffect((): void => {
     if (countdownStatus === 'play') {
       timer = setInterval((): void => {
@@ -50,8 +54,12 @@ export default function WorkCountdownMain(props: Props): JSX.Element {
         setTime(seconds);
 
         if (seconds <= 0) {
-          // horseTODO:
-          dispatch(increaseTaskWorkCount(props.tasks[0]));
+          const findTask = props.tasks
+            .find((task): boolean => task.taskId === props.selectedTaskId);
+          if (findTask) {
+            dispatch(increaseTaskWorkCount(findTask));
+          }
+          changeCountdownStatus('pause');
           clearInterval(timer);
           setTimeout((): void => {
             seconds = originSeconds;
@@ -73,10 +81,6 @@ export default function WorkCountdownMain(props: Props): JSX.Element {
       }
     }
   }, [countdownStatus]);
-
-  const changeCountdownStatus = (status: 'play' | 'pause' | 'stop'): void => {
-    setCountdownStatus(status);
-  };
 
   return (
     <Container maxWidth={false} className={classes.root}>
