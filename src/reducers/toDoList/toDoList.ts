@@ -23,7 +23,7 @@ const initState: Tasks = {
     {
       taskId: '2',
       taskName: 'the second thing to do today',
-      workCount: 1,
+      workCount: 2,
       breakCount: 1,
       done: false,
       doneTime: null,
