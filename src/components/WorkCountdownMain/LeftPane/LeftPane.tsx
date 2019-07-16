@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme): Record<'root', CSSProperties | (() 
 interface Props {
   tasks: TaskInterface[];
   selectedTaskId: string | null;
+  countdownStatus: 'play' | 'pause' | 'stop';
   time: number;
 }
 
@@ -40,7 +41,11 @@ export default function LeftPane(props: Props): JSX.Element {
   return (
     <div className={classes.root}>
       <AddNewMission />
-      <PomodoroTime selectedTask={selectedTask} time={props.time} />
+      <PomodoroTime
+        selectedTask={selectedTask}
+        countdownStatus={props.countdownStatus}
+        time={props.time}
+      />
       <ToDoListTopThree filteredTasks={filteredTasks} />
     </div>
   );

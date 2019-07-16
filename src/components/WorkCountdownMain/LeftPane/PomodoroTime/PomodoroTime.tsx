@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme: Theme): Record<'root' | 'checkboxContainer'
 
 interface Props {
   selectedTask: TaskInterface | undefined;
+  countdownStatus: 'play' | 'pause' | 'stop';
   time: number;
 }
 
@@ -67,6 +68,9 @@ export default function PomodoroTime(props: Props): JSX.Element {
       dispatch(changeTaskDone(props.selectedTask));
     }
   };
+
+  const isWorkStatus = !!props.selectedTask
+    && props.selectedTask.workCount <= props.selectedTask.breakCount;
 
   const selectedTask = props.selectedTask ? props.selectedTask : {
     taskId: '',
@@ -99,12 +103,14 @@ export default function PomodoroTime(props: Props): JSX.Element {
           <div>
             {new Array(selectedTask.workCount).fill('')
               .map((n, index): JSX.Element => <LensIcon key={index} className={classes.lensIcon} fontSize="small" />)}
-            <RadioButtonUncheckedIcon color="secondary" fontSize="small" />
+            {isWorkStatus && (props.countdownStatus === 'play'
+              ? <LensIcon color="secondary" fontSize="small" />
+              : <RadioButtonUncheckedIcon color="secondary" fontSize="small" />)}
           </div>
         </div>
       </div>
       <Typography
-        color="secondary"
+        color={isWorkStatus ? 'secondary' : 'primary'}
         variant="h1"
         align="center"
         className={classes.timeText}

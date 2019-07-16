@@ -16,7 +16,7 @@ const initState: Tasks = {
       taskId: '1',
       taskName: 'the First thing to do today',
       workCount: 2,
-      breakCount: 1,
+      breakCount: 2,
       done: false,
       doneTime: null,
     },
@@ -24,7 +24,7 @@ const initState: Tasks = {
       taskId: '2',
       taskName: 'the second thing to do today',
       workCount: 1,
-      breakCount: 0,
+      breakCount: 1,
       done: false,
       doneTime: null,
     },
@@ -48,7 +48,7 @@ const initState: Tasks = {
       taskId: '5',
       taskName: 'complete the keynote',
       workCount: 5,
-      breakCount: 4,
+      breakCount: 5,
       done: true,
       doneTime: new Date(2019, 6, 7),
     },
@@ -128,7 +128,11 @@ const reducer = (state = initState, action: ToDoListActionI): Tasks => {
     if (!findTask) {
       return state;
     }
-    Object.assign(findTask, { workCount: findTask.workCount + 1 });
+    if (findTask.workCount <= findTask.breakCount) {
+      Object.assign(findTask, { workCount: findTask.workCount + 1 });
+    } else {
+      Object.assign(findTask, { breakCount: findTask.breakCount + 1 });
+    }
     return state;
   };
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -17,6 +18,9 @@ const useStyles = makeStyles({
   },
   leftPane: {
     backgroundColor: '#FFEDF7',
+    '&.break': {
+      backgroundColor: '#E5F3FF',
+    },
   },
   middlePane: {
     position: 'relative',
@@ -47,6 +51,12 @@ export default function WorkCountdownMain(props: Props): JSX.Element {
     setCountdownStatus(status);
   };
 
+  const selectedTask = props.tasks
+    .find((task): boolean => task.taskId === props.selectedTaskId);
+
+  const isWorkStatus = !!selectedTask
+    && selectedTask.workCount <= selectedTask.breakCount;
+
   useEffect((): void => {
     if (countdownStatus === 'play') {
       timer = setInterval((): void => {
@@ -59,12 +69,9 @@ export default function WorkCountdownMain(props: Props): JSX.Element {
           if (findTask) {
             dispatch(increaseTaskWorkCount(findTask));
           }
-          changeCountdownStatus('pause');
-          clearInterval(timer);
           setTimeout((): void => {
-            seconds = originSeconds;
-            setTime(originSeconds);
-          }, 2000);
+            changeCountdownStatus('stop');
+          }, 500);
         }
       }, 1000);
     } else if (timer) {
@@ -85,12 +92,20 @@ export default function WorkCountdownMain(props: Props): JSX.Element {
   return (
     <Container maxWidth={false} className={classes.root}>
       <Grid container spacing={0}>
-        <Grid item xs={12} sm={12} md={5} className={classes.leftPane}>
-          <LeftPane tasks={props.tasks} selectedTaskId={props.selectedTaskId} time={time} />
+        <Grid item xs={12} sm={12} md={5} className={classNames(
+          classes.leftPane, { break: !isWorkStatus },
+        )}>
+          <LeftPane
+            tasks={props.tasks}
+            selectedTaskId={props.selectedTaskId}
+            countdownStatus={countdownStatus}
+            time={time}
+          />
         </Grid>
 
         <Grid item xs={12} sm={12} md={6} className={classes.middlePane}>
           <MiddlePane
+            isWorkStatus={isWorkStatus}
             changeCountdownStatus={changeCountdownStatus}
             countdownStatus={countdownStatus}
             time={time}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import classNames from 'classnames';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
@@ -23,6 +24,9 @@ const useStyles = makeStyles((theme: Theme): Record<'middleContaiberPane' | 'mid
   },
   middleLeftPane: {
     backgroundColor: '#FFEDF7',
+    '&.break': {
+      backgroundColor: '#E5F3FF',
+    },
   },
   middleRightPane: {
     backgroundColor: '#003164',
@@ -53,6 +57,7 @@ const useStyles = makeStyles((theme: Theme): Record<'middleContaiberPane' | 'mid
   },
   playCircleIcon: {
     fontSize: '8rem',
+    color: '#FFFFFF',
   },
   iconButton: {
     position: 'absolute',
@@ -86,12 +91,16 @@ const useStyles = makeStyles((theme: Theme): Record<'middleContaiberPane' | 'mid
       height: theme.spacing(40) + 50,
     },
     color: '#FF4384',
+    '&.break': {
+      color: '#00A7FF',
+    },
   },
 }));
 
 interface Props {
+  isWorkStatus: boolean;
   changeCountdownStatus: (status: 'play' | 'pause' | 'stop') => void;
-  countdownStatus: string;
+  countdownStatus: 'play' | 'pause' | 'stop';
   time: number;
   originSeconds: number;
 }
@@ -123,17 +132,23 @@ export default function MiddlePane(props: Props): JSX.Element {
   return (
     <>
       <Grid container spacing={0} className={classes.middleContaiberPane}>
-        <Grid item xs={12} sm={12} md={6} className={classes.middleLeftPane}></Grid>
+        <Grid item xs={12} sm={12} md={6} className={
+          classNames(classes.middleLeftPane, { break: !props.isWorkStatus })
+        }></Grid>
         <Grid item xs={12} sm={12} md={6} className={classes.middleRightPane}></Grid>
       </Grid>
       <div className={classes.fabContainer}>
-        <Fab className={classes.fab} color="secondary" onClick={(): void => {
-          if (props.countdownStatus === 'play') {
-            props.changeCountdownStatus('pause');
-          } else {
-            props.changeCountdownStatus('play');
-          }
-        }}>
+        <Fab
+          className={classes.fab}
+          color={props.isWorkStatus ? 'secondary' : 'primary'}
+          onClick={(): void => {
+            if (props.countdownStatus === 'play') {
+              props.changeCountdownStatus('pause');
+            } else {
+              props.changeCountdownStatus('play');
+            }
+          }}
+        >
           {(props.countdownStatus === 'pause' || props.countdownStatus === 'stop') && <PlayCircleFilledIcon className={classes.playCircleIcon} />}
           {props.countdownStatus === 'play' && <PauseCircleFilledIcon className={classes.playCircleIcon} />}
         </Fab>
@@ -145,11 +160,12 @@ export default function MiddlePane(props: Props): JSX.Element {
         <CircularProgress
           className={classes.progress}
           variant="static"
-          color="secondary"
+          color={props.isWorkStatus ? 'secondary' : 'primary'}
           value={completed}
           thickness={1}
         />
-        <svg className={classes.fabBorderSvg} viewBox="22 22 44 44">
+
+        <svg className={classNames(classes.fabBorderSvg, { break: !props.isWorkStatus })} viewBox="22 22 44 44">
           <circle
             className="MuiCircularProgress-circle MuiCircularProgress-circleStatic"
             cx="44" cy="44" r="21.5" fill="none" strokeWidth="0.2"
